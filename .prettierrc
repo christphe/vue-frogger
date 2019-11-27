@@ -1,0 +1,6 @@
+{
+	"vueIndentScriptAndStyle": true,
+	"semi": true,
+	"useTabs": true,
+	"trailingComma": "all"
+}
