@@ -1,26 +1,26 @@
 <template>
-  <div id="app">
-    <Game />
-  </div>
+	<div id="app">
+		<Game />
+	</div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-import Game from "./components/Game.vue";
+	import Vue from 'vue';
+	import HelloWorld from './components/HelloWorld.vue';
+	import Game from './components/Game.vue';
 
-export default Vue.extend({
-  name: "app",
-  components: {
-    Game
-  }
-});
+	export default Vue.extend({
+		name: 'app',
+		components: {
+			Game,
+		},
+	});
 </script>
 
 <style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+	#app {
+		font-family: 'Avenir', Helvetica, Arial, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
 </style>

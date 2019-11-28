@@ -2,5 +2,7 @@
 	"vueIndentScriptAndStyle": true,
 	"semi": true,
 	"useTabs": true,
-	"trailingComma": "all"
+	"tabWidth": 4,
+	"trailingComma": "all",
+	"singleQuote": true
 }

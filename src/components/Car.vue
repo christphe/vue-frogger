@@ -10,13 +10,13 @@
 	></div>
 </template>
 <script lang="ts">
-	import Vue from "vue";
+	import Vue from 'vue';
 	import {
 		createComponent,
 		computed,
 		onMounted,
 		reactive,
-	} from "@vue/composition-api";
+	} from '@vue/composition-api';
 	export default createComponent({
 		props: {
 			x: {
@@ -49,9 +49,9 @@
 				setInterval(() => {
 					pos.x += 1 * props.speed;
 					if (pos.x >= 224) {
-						pos.x -= 224 + (16 * props.size);
+						pos.x -= 224 + 16 * props.size;
 					} else if (pos.x < -(16 * props.size)) {
-						pos.x += 224 + (16 * props.size);
+						pos.x += 224 + 16 * props.size;
 					}
 				}, 10);
 			});

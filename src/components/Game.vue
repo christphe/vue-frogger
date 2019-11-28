@@ -12,51 +12,17 @@
 		<div id="screen" v-if="started">
 			<background />
 			<audio-player :play="started && playAudio" />
-			<frog :x="frogPos.x" :y="frogPos.y" />
+			<frog :x="frog.pos.x" :y="frog.pos.y" />
 			<car
-				v-for="(index, i) in 3"
-				:key="'lorry' + index"
-				:x="-16 + i * 16 * 5"
-				:y="144"
-				backgroundPosition="-64px -335px"
-				:speed="-0.2"
-				:size="2"
-			/>
-			<car
-				v-for="(index, i) in 3"
-				:key="'fast' + index"
-				:x="-16 + i * 16 * 5"
-				:y="160"
-				backgroundPosition="-128px -335px"
-				:speed="0.7"
-				:size="1"
-			/>
-			<car
-				v-for="(index, i) in 3"
-				:key="'normal' + index"
-				:x="-16 + i * 16 * 5"
-				:y="176"
-				backgroundPosition="-104px -335px"
-				:speed="-0.5"
-				:size="1"
-			/>
-			<car
-				v-for="(index, i) in 3"
-				:key="'dozer' + index"
-				:x="-16 + i * 16 * 5"
-				:y="192"
-				backgroundPosition="-40px -335px"
-				:speed="0.2"
-				:size="1"
-			/>
-			<car
-				v-for="(index, i) in 3"
-				:key="'slow' + index"
-				:x="-16 + i * 16 * 5"
-				:y="208"
-				backgroundPosition="-16px -335px"
-				:speed="-0.3"
-				:size="1"
+				v-for="car in cars"
+				:key="car.id"
+				:x="car.pos.x"
+				:y="car.pos.y"
+				:backgroundPosition="
+					`-${car.backgroundPosition.x}px -${car.backgroundPosition.y}px`
+				"
+				:speed="car.speed.x"
+				:size="car.size.x"
 			/>
 		</div>
 		<div id="button-screen" v-if="!started">
@@ -73,18 +39,20 @@
 </template>
 
 <script lang="ts">
-	import Vue from "vue";
+	import Vue from 'vue';
 	import {
 		createComponent,
 		reactive,
 		ref,
 		onMounted,
 		Ref,
-	} from "@vue/composition-api";
-	import Background from "./Background.vue";
-	import Frog from "./Frog.vue";
-	import AudioPlayer from "./AudioPlayer.vue";
-	import Car from "./Car.vue";
+		computed,
+	} from '@vue/composition-api';
+	import Background from './Background.vue';
+	import Frog from './Frog.vue';
+	import AudioPlayer from './AudioPlayer.vue';
+	import Car from './Car.vue';
+	import { initGame } from './InitGame';
 
 	export default createComponent({
 		components: {
@@ -93,18 +61,15 @@
 			AudioPlayer,
 			Car,
 		},
-		setup() {
+		setup(props, { root }) {
 			const started = ref(false);
 			const playAudio = ref(true);
 			const gameDiv: Ref<any> = ref(null);
 			onMounted(() => {
+				initGame(root.$store);
 				gameDiv.value.focus();
 			});
 			let keylock = false;
-			const frogPos = reactive({
-				x: 112,
-				y: 224,
-			});
 			function handleLock(callback: () => void): void {
 				if (keylock) {
 					return;
@@ -116,19 +81,26 @@
 				}, 100);
 			}
 			function onUp() {
-				frogPos.y -= 16;
+				frog.value.pos.y -= 16;
 			}
 			function onDown() {
-				frogPos.y += 16;
+				frog.value.pos.y += 16;
 			}
 			function onRight() {
-				frogPos.x += 16;
+				frog.value.pos.x += 16;
 			}
 			function onLeft() {
-				frogPos.x -= 16;
+				frog.value.pos.x -= 16;
 			}
+			const cars = computed(() => {
+				return root.$store.state.cars;
+			});
+			const frog = computed(() => {
+				return root.$store.state.frog;
+			});
 			return {
-				frogPos,
+				cars,
+				frog,
 				onUp,
 				onDown,
 				onRight,
