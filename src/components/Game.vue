@@ -12,7 +12,7 @@
 		<div id="screen" v-if="started">
 			<background />
 			<audio-player :play="started && playAudio" />
-			<frog :x="frog.pos.x" :y="frog.pos.y" />
+			<frog :sprite="frog" />
 			<car
 				v-for="car in cars"
 				:key="car.id"
@@ -81,16 +81,24 @@
 				}, 100);
 			}
 			function onUp() {
-				frog.value.pos.y -= 16;
+				move(0, -16);
 			}
 			function onDown() {
-				frog.value.pos.y += 16;
+				move(0, 16);
 			}
 			function onRight() {
-				frog.value.pos.x += 16;
+				move(16, 0);
 			}
 			function onLeft() {
-				frog.value.pos.x -= 16;
+				move(-16, 0);
+			}
+			function move(x: number, y: number) {
+				const pos = {
+					...frog.value.pos,
+				};
+				pos.x += x;
+				pos.y += y;
+				root.$store.commit('updateFrogPosition', { pos });
 			}
 			const cars = computed(() => {
 				return root.$store.state.cars;

@@ -2,10 +2,10 @@
 	<div
 		class="frog"
 		:style="{
-			left: `${pos.x}px`,
-			top: `${pos.y}px`,
-			'background-position-x': `-${backgroundPosition.x}px`,
-			'background-position-y': `-${backgroundPosition.y}px`,
+			left: `${sprite.pos.x}px`,
+			top: `${sprite.pos.y}px`,
+			'background-position-x': `-${sprite.backgroundPosition.x}px`,
+			'background-position-y': `-${sprite.backgroundPosition.y}px`,
 		}"
 	/>
 </template>
@@ -19,28 +19,12 @@
 	} from "@vue/composition-api";
 	export default createComponent({
 		props: {
-			x: {
-				type: Number,
-				required: true,
-			},
-			y: {
-				type: Number,
+			sprite: {
+				type: Object,
 				required: true,
 			},
 		},
 		setup(props) {
-			const pos = computed(() => ({
-				x: props.x,
-				y: props.y,
-			}));
-			const backgroundPosition = reactive({
-				x: 16,
-				y: 16,
-			});
-			return {
-				pos,
-				backgroundPosition,
-			};
 		},
 	});
 </script>
