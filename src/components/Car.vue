@@ -10,14 +10,14 @@
 	></div>
 </template>
 <script lang="ts">
-	import Vue from 'vue';
+	import { defineComponent } from 'vue';
 	import {
-		createComponent,
+		
 		computed,
 		onMounted,
 		reactive,
-	} from '@vue/composition-api';
-	export default createComponent({
+	} from 'vue';
+	export default defineComponent({
 		props: {
 			x: {
 				type: Number,

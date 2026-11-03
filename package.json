@@ -3,37 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "serve": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "lint": "eslint src",
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@vue/composition-api": "^0.3.2",
-    "core-js": "^3.3.2",
-    "vue": "^2.6.10",
-    "vuex": "^3.1.2"
+    "vue": "^3.5.44",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-e2e-cypress": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.0",
-    "@vue/cli-plugin-typescript": "^4.0.0",
-    "@vue/cli-plugin-unit-jest": "^4.0.0",
-    "@vue/cli-plugin-vuex": "^4.1.1",
-    "@vue/cli-service": "^4.0.0",
-    "@vue/eslint-config-prettier": "^5.0.0",
-    "@vue/eslint-config-typescript": "^4.0.0",
-    "@vue/test-utils": "1.0.0-beta.29",
-    "eslint": "^5.16.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^5.0.0",
-    "prettier": "^1.18.2",
-    "sass": "^1.19.0",
-    "sass-loader": "^8.0.0",
-    "typescript": "~3.5.3",
-    "vue-template-compiler": "^2.6.10"
+    "@playwright/test": "^1.64.1",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vue/test-utils": "^2.5.1",
+    "eslint": "^10.14.0",
+    "eslint-plugin-vue": "^10.12.0",
+    "jsdom": "^30.1.3",
+    "sass": "^1.107.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0",
+    "vue-tsc": "^3.3.14"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "overrides": {
+    "minimatch": "^11.0.4",
+    "glob": "^14.0.3"
   }
 }

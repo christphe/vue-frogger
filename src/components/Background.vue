@@ -2,9 +2,8 @@
 	<div id="background"></div>
 </template>
 <script lang="ts">
-	import Vue from 'vue';
-	import { createComponent } from '@vue/composition-api';
-	export default createComponent({
+	import { defineComponent } from 'vue';
+	export default defineComponent({
 		setup() {},
 	});
 </script>

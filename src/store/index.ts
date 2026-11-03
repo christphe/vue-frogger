@@ -1,16 +1,15 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 import { Sprite } from '@/shared/Sprite';
 import { vec, Vector } from '@/shared/Vector';
 
-Vue.use(Vuex);
+
 
 export interface State {
 	cars: Sprite[];
 	frog?: Sprite;
 }
 
-export default new Vuex.Store<State>({
+export default createStore<State>({
 	state: {
 		cars: [],
 	},

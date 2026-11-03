@@ -12,7 +12,7 @@
 		<div id="screen" v-if="started">
 			<background />
 			<audio-player :play="started && playAudio" />
-			<frog :sprite="frog" />
+			<frog v-if="frog" :sprite="frog" />
 			<car
 				v-for="car in cars"
 				:key="car.id"
@@ -39,34 +39,37 @@
 </template>
 
 <script lang="ts">
-	import Vue from 'vue';
+	import { defineComponent } from 'vue';
 	import {
-		createComponent,
+		
 		reactive,
 		ref,
 		onMounted,
 		Ref,
 		computed,
-	} from '@vue/composition-api';
+	} from 'vue';
+	import { useStore } from 'vuex';
+	import type { State } from '../store';
 	import Background from './Background.vue';
 	import Frog from './Frog.vue';
 	import AudioPlayer from './AudioPlayer.vue';
 	import Car from './Car.vue';
 	import { initGame } from './InitGame';
 
-	export default createComponent({
+	export default defineComponent({
 		components: {
 			Background,
 			Frog,
 			AudioPlayer,
 			Car,
 		},
-		setup(props, { root }) {
+		setup() {
+			const store = useStore<State>();
 			const started = ref(false);
 			const playAudio = ref(true);
 			const gameDiv: Ref<any> = ref(null);
 			onMounted(() => {
-				initGame(root.$store);
+				initGame(store);
 				gameDiv.value.focus();
 			});
 			let keylock = false;
@@ -94,17 +97,17 @@
 			}
 			function move(x: number, y: number) {
 				const pos = {
-					...frog.value.pos,
+					...frog.value!.pos,
 				};
 				pos.x += x;
 				pos.y += y;
-				root.$store.commit('updateFrogPosition', { pos });
+				store.commit('updateFrogPosition', { pos });
 			}
 			const cars = computed(() => {
-				return root.$store.state.cars;
+				return store.state.cars;
 			});
 			const frog = computed(() => {
-				return root.$store.state.frog;
+				return store.state.frog;
 			});
 			return {
 				cars,
