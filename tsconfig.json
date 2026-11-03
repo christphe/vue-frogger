@@ -4,19 +4,19 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "types": [
-      "webpack-env",
-      "jest"
+      "vite/client"
     ],
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
+      ],
+      "vuex": [
+        "./node_modules/vuex/types/index.d.ts"
       ]
     },
     "lib": [
@@ -24,7 +24,8 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",

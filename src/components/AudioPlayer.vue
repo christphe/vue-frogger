@@ -1,12 +1,12 @@
 <template>
-	<audio ref="audio" autoplay preload loop>
+	<audio ref="audio" autoplay preload="auto" loop>
 		<source src="../assets/snd/theme.mp3" type="audio/mpeg" />
 	</audio>
 </template>
 <script lang="ts">
-	import Vue from "vue";
-	import { createComponent, Ref, ref, watch } from "@vue/composition-api";
-	export default createComponent({
+	import { defineComponent } from "vue";
+	import {  Ref, ref, watchEffect } from "vue";
+	export default defineComponent({
 		props: {
 			play: {
 				type: Boolean,
@@ -15,11 +15,11 @@
 		},
 		setup(props) {
 			const audio: Ref<any> = ref(null);
-			watch(() => {
+			watchEffect(() => {
 				if (props.play) {
-					audio.value.play();
+					audio.value?.play().catch(() => {});
 				} else {
-					audio.value.pause();
+					audio.value?.pause();
 				}
 			});
 			return {

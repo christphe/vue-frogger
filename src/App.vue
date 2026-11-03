@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-	import Vue from 'vue';
-	import HelloWorld from './components/HelloWorld.vue';
+	import { defineComponent } from 'vue';
+	
 	import Game from './components/Game.vue';
 
-	export default Vue.extend({
+	export default defineComponent({
 		name: 'app',
 		components: {
 			Game,

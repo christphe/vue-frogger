@@ -10,14 +10,14 @@
 	/>
 </template>
 <script lang="ts">
-	import Vue from "vue";
+	import { defineComponent } from "vue";
 	import {
-		createComponent,
+		
 		reactive,
 		ref,
 		computed,
-	} from "@vue/composition-api";
-	export default createComponent({
+	} from "vue";
+	export default defineComponent({
 		props: {
 			sprite: {
 				type: Object,
